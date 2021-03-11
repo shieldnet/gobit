@@ -2,11 +2,9 @@ package api
 
 import (
 	"encoding/json"
-	"io/ioutil"
 	"log"
 	"net/http"
 	"strconv"
-	"time"
 )
 
 const (
@@ -18,7 +16,7 @@ const (
 )
 
 const (
-	Minutes = "minutes/"
+	ByMinutes = "minutes/"
 )
 
 type Candle struct {
@@ -35,21 +33,10 @@ type Candle struct {
 	Unit                 int     `json:"unit"`
 }
 
-type CandleData []Candle
+type CandleList []Candle
 
-func HttpGet(url string) ([]byte, error) {
-	client := http.Client{Timeout: 10 * time.Second}
-	resp, err := client.Get(url)
-	if err != nil {
-		log.Fatal("[GetMinuteCandle] HTTP GET Error", resp.StatusCode)
-		panic(err)
-	}
-	defer resp.Body.Close()
-	return ioutil.ReadAll(resp.Body)
-}
-
-func GetMinuteCandle(unit, count int, market string) CandleData {
-	req, err := http.NewRequest("GET", ApiAddr+Candles+Minutes+strconv.Itoa(unit), nil)
+func GetMinuteCandle(unit, count int, market string) CandleList {
+	req, err := http.NewRequest("GET", ApiAddr+Candles+ByMinutes+strconv.Itoa(unit), nil)
 	if err != nil {
 		log.Panic(err)
 		panic(err)
@@ -59,8 +46,9 @@ func GetMinuteCandle(unit, count int, market string) CandleData {
 	q.Add("count", strconv.Itoa(count))
 	req.URL.RawQuery = q.Encode()
 
-	resp, _ := HttpGet(req.URL.String())
-	candles := CandleData{}
+	resp, _ := HttpGet(req.URL.String(), map[string]string{})
+	//println(string(resp))
+	candles := CandleList{}
 	err = json.Unmarshal(resp, &candles)
 	if err != nil {
 		panic(err)
