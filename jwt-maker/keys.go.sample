@@ -1,0 +1,4 @@
+package jwt_maker
+
+var secretKey = []byte("Your Secret Key")
+var accessKey = "Your Access Key"
