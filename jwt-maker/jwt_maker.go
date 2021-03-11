@@ -8,8 +8,6 @@ import (
 	"log"
 )
 
-var secretKey = []byte("Secret")
-
 // payload 있으면 args = `{"key":"value"}`, 없으면 nil
 func MakeJWT(args interface{}) string {
 	switch args.(type) {
@@ -27,7 +25,7 @@ func MakeJWT(args interface{}) string {
 func makeJwtWithoutPayload() string {
 	token := jwt.New(jwt.SigningMethodHS256)
 	claims := make(jwt.MapClaims)
-	claims["access_key"] = "my_access_key"
+	claims["access_key"] = accessKey
 	claims["nonce"] = uuid.NewV4().String()
 	token.Claims = claims
 
@@ -43,7 +41,7 @@ func makeJwtWithoutPayload() string {
 func makeJwtWithPayload(payload string) string {
 	token := jwt.New(jwt.SigningMethodHS256)
 	claims := make(jwt.MapClaims)
-	claims["access_key"] = "my_access_key"
+	claims["access_key"] = accessKey
 	claims["query"] = payload
 	claims["query_hash"] = sha512.New().Sum([]byte(payload))
 	claims["query_hash_algorithm"] = "SHA512"
