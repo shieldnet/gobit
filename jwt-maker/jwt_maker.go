@@ -2,27 +2,14 @@ package jwt_maker
 
 import (
 	"crypto/sha512"
-	"fmt"
+	"encoding/hex"
 	"github.com/dgrijalva/jwt-go"
 	uuid "github.com/satori/go.uuid"
 	"log"
+	"net/url"
 )
 
-// payload 있으면 args = `{"key":"value"}`, 없으면 nil
-func MakeJWT(args interface{}) string {
-	switch args.(type) {
-	case string:
-		str := fmt.Sprintf("%v", args)
-		return makeJwtWithPayload(str)
-	case nil:
-		return makeJwtWithoutPayload()
-	default:
-		return ""
-	}
-	return ""
-}
-
-func makeJwtWithoutPayload() string {
+func MakeJwtWithoutPayload() string {
 	token := jwt.New(jwt.SigningMethodHS256)
 	claims := make(jwt.MapClaims)
 	claims["access_key"] = accessKey
@@ -38,16 +25,22 @@ func makeJwtWithoutPayload() string {
 	return signedToken
 }
 
-func makeJwtWithPayload(payload string) string {
-	token := jwt.New(jwt.SigningMethodHS256)
+func MakeJwtWithPayload(payload url.Values) string {
+
 	claims := make(jwt.MapClaims)
 	claims["access_key"] = accessKey
-	claims["query"] = payload
-	claims["query_hash"] = sha512.New().Sum([]byte(payload))
-	claims["query_hash_algorithm"] = "SHA512"
-	token.Claims = claims
+	claims["nonce"] = uuid.NewV4().String()
+	claims["query"] = payload.Encode()
+	qh := sha512.New()
+	qh.Reset()
+	qh.Write([]byte(payload.Encode()))
+	claims["query_hash"] = hex.EncodeToString(qh.Sum(nil))
+	claims["query_hash_alg"] = "SHA512"
+
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 
 	signedToken, err := token.SignedString(secretKey)
+	log.Println(signedToken)
 	if err != nil {
 		log.Println("SignedString Error")
 		log.Fatal(err)
