@@ -40,7 +40,7 @@ func MakeJwtWithPayload(payload url.Values) string {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 
 	signedToken, err := token.SignedString(secretKey)
-	log.Println(signedToken)
+	//log.Println(signedToken)
 	if err != nil {
 		log.Println("SignedString Error")
 		log.Fatal(err)
