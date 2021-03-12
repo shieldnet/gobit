@@ -4,6 +4,7 @@ import (
 	"github.com/shieldnet/gobit/api"
 	"log"
 	"strconv"
+	"strings"
 	"time"
 )
 
@@ -68,7 +69,8 @@ func SellCheck(market string) {
 		avgBuyPrice := 0.0
 		balance := ""
 		for _, account := range accounts {
-			if account.Currency == market {
+			log.Println(account.Currency, market, account.Balance)
+			if account.Currency == strings.ReplaceAll(market,"KRW-", "") {
 				avgBuyPrice, _ = strconv.ParseFloat(account.AvgBuyPrice, 32)
 				balance = account.Balance
 				break
@@ -94,5 +96,6 @@ func SellCheck(market string) {
 }
 
 func Sell(market string, balance string) {
-	api.SellOrderByMarketPrice(market, balance)
+	//println(market, balance)
+	println(api.SellOrderByMarketPrice(market, balance))
 }
