@@ -9,5 +9,4 @@ const (
 
 func main() {
 	strategy.Init(MLK)
-
 }
