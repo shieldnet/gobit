@@ -4,7 +4,7 @@ import "github.com/shieldnet/gobit/strategy"
 
 const (
 	Tfuel = "KRW-TFUEL"
-	MLK = "KRW-ANKR"
+	MLK = "KRW-PCI"
 )
 
 func main() {

@@ -41,7 +41,7 @@ func Init(market string) {
 
 func BuyCheck(market string) {
 	for true {
-		candles := api.GetMinuteCandle(3, 28, market)
+		candles := api.GetMinuteCandle(3, 15, market)
 		nowTradeValue := candles[0].TradePrice
 		if isHighestTradeValue(nowTradeValue, candles) {
 			log.Println("[BuyCheck] 28개중 최고가이므로 구매" + time.Now().String())
@@ -55,7 +55,7 @@ func BuyCheck(market string) {
 
 func Buy(market string) {
 	log.Println("[Buy] 구매를 시작합니다." + time.Now().String())
-	api.BuyOrderByMarketPrice(market, "400000")
+	api.BuyOrderByMarketPrice(market, "200000")
 	time.Sleep(500 * time.Millisecond)
 	SellCheck(market)
 }
@@ -63,7 +63,7 @@ func Buy(market string) {
 func SellCheck(market string) {
 	log.Println("[SellCheck] 주식을 팔지 말지 생각해봅니다." + time.Now().String())
 	for true {
-		candles := api.GetMinuteCandle(5, 60, market)
+		candles := api.GetMinuteCandle(3, 15, market)
 		accounts := api.GetAccountInfo()
 		nowTradeValue := candles[0].TradePrice
 		avgBuyPrice := 0.0
@@ -77,9 +77,9 @@ func SellCheck(market string) {
 			}
 		}
 
-		time.Sleep(1 * time.Second)
+		time.Sleep(500 * time.Millisecond)
 
-		if isQuitPrice(float64(nowTradeValue), avgBuyPrice, 3) {
+		if isQuitPrice(float64(nowTradeValue), avgBuyPrice, 2.3) {
 			log.Println("[SellCheck] 손절률 이상 가격이 떨어졌으므로, 손절합니다." + time.Now().String())
 			Sell(market, balance)
 			break
