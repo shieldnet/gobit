@@ -12,6 +12,7 @@ import (
 	"log"
 	"net/http"
 	"strconv"
+	"time"
 )
 
 const (
@@ -46,7 +47,6 @@ func GetMinuteCandle(unit, count int, market string) CandleList {
 	req, err := http.NewRequest("GET", ApiAddr+Candles+ByMinutes+strconv.Itoa(unit), nil)
 	if err != nil {
 		log.Panic(err)
-		panic(err)
 	}
 	q := req.URL.Query()
 	q.Add("market", market)
@@ -58,7 +58,18 @@ func GetMinuteCandle(unit, count int, market string) CandleList {
 	candles := CandleList{}
 	err = json.Unmarshal(resp, &candles)
 	if err != nil {
-		log.Fatalln(string(resp),err)
+		log.Fatalln(string(resp), err)
 	}
 	return candles
+}
+
+func GetAllMinuteCandlesOfMarket(unit, count int) map[string]CandleList {
+	ret := map[string]CandleList{}
+	markets := GetAllMarketCodes()
+	for _, market := range markets {
+		marketCode := market.Market // 종목 코드
+		ret[marketCode] = GetMinuteCandle(unit, count, marketCode)
+		time.Sleep(110 * time.Millisecond) // Quotation은 IP당 1초에 10개니까 API 개수 제한 걸자.
+	}
+	return ret
 }
