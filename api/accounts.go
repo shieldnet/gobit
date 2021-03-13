@@ -32,7 +32,7 @@ func GetAccountInfo() AccountList {
 	}
 	//println(req.URL.String())
 
-	resp, _ := HttpGet(req.URL.String(), map[string]string{"Authorization": "Bearer " + jwt_maker.MakeJwtWithoutPayload()})
+	resp, _ := HttpGet(req.URL.String(), map[string]string{"Authorization": "Bearer " + jwt_maker.MakeJwtWithoutPayload(jwt_maker.MainKey)})
 	//println(string(resp))
 	accounts := AccountList{}
 	err = json.Unmarshal(resp, &accounts)

@@ -22,7 +22,7 @@ func BuyOrderByMarketPrice(market, totalPrice string) string {
 	side := "bid"
 	data := makeUrlValues(market, side, "", totalPrice, ord_type)
 	header := map[string]string{
-		"Authorization": "Bearer " + jwt_maker.MakeJwtWithPayload(data),
+		"Authorization": "Bearer " + jwt_maker.MakeJwtWithPayload(jwt_maker.MainKey, data),
 	}
 	resp, err := HttpPOST(OrderURL, header, data)
 	if err != nil {
@@ -36,7 +36,7 @@ func SellOrderByMarketPrice(market, volume string) string {
 	side := "ask"
 	data := makeUrlValues(market, side, volume, "", ord_type)
 	header := map[string]string{
-		"Authorization": "Bearer " + jwt_maker.MakeJwtWithPayload(data),
+		"Authorization": "Bearer " + jwt_maker.MakeJwtWithPayload(jwt_maker.MainKey, data),
 	}
 	resp, err := HttpPOST(OrderURL, header, data)
 	if err != nil {
