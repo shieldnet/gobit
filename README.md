@@ -20,6 +20,10 @@
 * 전략을 본인의 취향에 맞게 수정합니다. (`strategy.go.sample` 파일을 `strategy.go`로 변경해준 다음 작업합니다.)
 * `go run main.go`로 전략을 실행합니다.
 
+## 사용 결과 화면
+![image](https://user-images.githubusercontent.com/9548599/111020890-4e1e1380-840c-11eb-8c59-69141c5f7c9b.png)
+
+
 ## Caution(주의사항)
 * 본 자동 매매 프로그램을 이용해서 손해가 발생하더라도, 저는 책임지지 않습니다.
 * 본 자동 매매 프로그램을 이용하는 순간 위의 주의사항에 동의한 것으로 간주합니다.
