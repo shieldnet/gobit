@@ -1,3 +1,10 @@
+/* ------------ License ------------ */
+// BSD 3-Clause License
+//
+// Copyright (c) 2021, Seongmin Kim
+// All rights reserved.
+/* --------------------------------- */
+
 package strategy
 
 import (
