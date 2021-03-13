@@ -16,14 +16,14 @@ import (
 	"net/url"
 )
 
-func MakeJwtWithoutPayload() string {
+func MakeJwtWithoutPayload(keys Keys) string {
 	token := jwt.New(jwt.SigningMethodHS256)
 	claims := make(jwt.MapClaims)
-	claims["access_key"] = accessKey
+	claims["access_key"] = keys.Access
 	claims["nonce"] = uuid.NewV4().String()
 	token.Claims = claims
 
-	signedToken, err := token.SignedString(secretKey)
+	signedToken, err := token.SignedString(keys.Secret)
 	if err != nil {
 		log.Println("SignedString Error")
 		log.Fatal(err)
@@ -32,10 +32,10 @@ func MakeJwtWithoutPayload() string {
 	return signedToken
 }
 
-func MakeJwtWithPayload(payload url.Values) string {
+func MakeJwtWithPayload(keys Keys,payload url.Values) string {
 
 	claims := make(jwt.MapClaims)
-	claims["access_key"] = accessKey
+	claims["access_key"] = keys.Access
 	claims["nonce"] = uuid.NewV4().String()
 	claims["query"] = payload.Encode()
 	qh := sha512.New()
@@ -46,7 +46,7 @@ func MakeJwtWithPayload(payload url.Values) string {
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 
-	signedToken, err := token.SignedString(secretKey)
+	signedToken, err := token.SignedString(keys.Secret)
 	//log.Println(signedToken)
 	if err != nil {
 		log.Println("SignedString Error")
