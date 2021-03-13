@@ -8,6 +8,8 @@
 ## Private Files ##
 keys.go
 strategy.go
+result.json
+
 
 ### Go ###
 # Binaries for programs and plugins
