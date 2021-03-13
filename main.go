@@ -18,11 +18,10 @@ const (
 	Btc   = "KRW-BTC"
 	Solve = "KRW-SOLVE"
 	Obsr  = "KRW-OBSR"
-	M
 )
 
 func main() {
-	coinList := []string{Tfuel, Ankr, Chz, Pxl, Kava, Btc, Solve, Mlk, Obsr, Med}
+	coinList := []string{Tfuel, Ankr, Chz, Pxl, Kava, Solve, Mlk, Obsr}
 	var strategies []*strategy.Strategy
 	for _, coin := range coinList {
 		s := &strategy.Strategy{
