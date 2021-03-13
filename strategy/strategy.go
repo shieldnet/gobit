@@ -5,8 +5,8 @@ import (
 	"log"
 	"strconv"
 	"strings"
-	"time"
 	"sync"
+	"time"
 )
 
 type Trader interface {
@@ -26,17 +26,18 @@ type Strategy struct {
 	CandleUnit    int
 	QuitRate      float64
 	Balance       string
+	TotalPrice    string
 }
 
 func (s *Strategy) Execute(wait *sync.WaitGroup) {
 	defer wait.Done()
 
 	f := map[string]func(){
-		"Init": s.Init,
-		"BuyCheck": s.BuyCheck,
-		"Buy": s.Buy,
+		"Init":      s.Init,
+		"BuyCheck":  s.BuyCheck,
+		"Buy":       s.Buy,
 		"SellCheck": s.SellCheck,
-		"Sell": s.Sell,
+		"Sell":      s.Sell,
 	}
 	f[s.NextState]()
 	return
@@ -65,7 +66,7 @@ func (s *Strategy) BuyCheck() {
 
 func (s *Strategy) Buy() {
 	log.Println("[Buy] 구매를 시작합니다." + s.Market)
-	api.BuyOrderByMarketPrice(s.Market, "50000")
+	api.BuyOrderByMarketPrice(s.Market, s.TotalPrice)
 	time.Sleep(SleepInterval * time.Millisecond)
 	s.NextState = "SellCheck"
 	return
@@ -86,8 +87,6 @@ func (s *Strategy) SellCheck() {
 			break
 		}
 	}
-	//log.Println(avgBuyPrice, balance)
-	time.Sleep(SleepInterval * time.Millisecond)
 
 	if isQuitPrice(float64(nowTradeValue), avgBuyPrice, s.QuitRate) {
 		log.Println("[SellCheck] 손절률 이상 가격이 떨어졌으므로, 손절합니다." + s.Market)
