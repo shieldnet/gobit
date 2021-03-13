@@ -4,7 +4,11 @@
 
 ## .idea ##
 .idea/*
+
+## Private Files ##
 keys.go
+strategy.go
+
 ### Go ###
 # Binaries for programs and plugins
 *.exe

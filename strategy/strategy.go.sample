@@ -53,11 +53,9 @@ func (s *Strategy) Init() {
 func (s *Strategy) BuyCheck() {
 	candles := api.GetMinuteCandle(3, s.BuyCandleNum, s.Market)
 	nowTradeValue := candles[0].TradePrice
-	if isHighestTradeValue(nowTradeValue, candles) {
-		log.Println("[BuyCheck] 15개중 최고가이므로 구매" + s.Market)
-		s.NextState = "Buy"
-		return
-	}
+
+    // Buy Or Not judgement with Candles Information
+
 	time.Sleep(SleepInterval * time.Millisecond)
 	log.Println("[BuyCheck] 조건을 만족하지 않았으므로, 구매하지 않습니다." + s.Market)
 
@@ -88,16 +86,8 @@ func (s *Strategy) SellCheck() {
 		}
 	}
 
-	if isQuitPrice(float64(nowTradeValue), avgBuyPrice, s.QuitRate) {
-		log.Println("[SellCheck] 손절률 이상 가격이 떨어졌으므로, 손절합니다." + s.Market)
-		s.NextState = "Sell"
-		return
-	}
-	if isLowestTradeValue(nowTradeValue, candles) {
-		log.Println("[SellCheck] 7개중 최저가이므로 판매합니다." + s.Market)
-		s.NextState = "Sell"
-		return
-	}
+    // Sell Or Not judgement with Candles Information
+
 	time.Sleep(SleepInterval * time.Millisecond)
 	log.Println("[SellCheck] 조건을 만족하지 않았으므로, 판매하지 않습니다." + s.Market)
 
