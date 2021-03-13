@@ -51,7 +51,7 @@ func GetMinuteCandle(unit, count int, market string) CandleList {
 	candles := CandleList{}
 	err = json.Unmarshal(resp, &candles)
 	if err != nil {
-		panic(err)
+		log.Fatalln(string(resp),err)
 	}
 	return candles
 }

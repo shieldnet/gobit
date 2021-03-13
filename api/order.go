@@ -2,6 +2,7 @@ package api
 
 import (
 	jwt_maker "github.com/shieldnet/gobit/jwt-maker"
+	"log"
 	"net/url"
 )
 
@@ -16,7 +17,10 @@ func BuyOrderByMarketPrice(market, totalPrice string) string {
 	header := map[string]string{
 		"Authorization": "Bearer " + jwt_maker.MakeJwtWithPayload(data),
 	}
-	resp, _ := HttpPOST(OrderURL, header, data)
+	resp, err := HttpPOST(OrderURL, header, data)
+	if err != nil {
+		log.Fatalln(string(resp), err)
+	}
 	return string(resp)
 }
 
@@ -27,7 +31,10 @@ func SellOrderByMarketPrice(market, volume string) string {
 	header := map[string]string{
 		"Authorization": "Bearer " + jwt_maker.MakeJwtWithPayload(data),
 	}
-	resp, _ := HttpPOST(OrderURL, header, data)
+	resp, err := HttpPOST(OrderURL, header, data)
+	if err != nil {
+		log.Fatalln(string(resp), err)
+	}
 	return string(resp)
 }
 

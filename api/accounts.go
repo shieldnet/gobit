@@ -22,7 +22,6 @@ func GetAccountInfo() AccountList {
 	req, err := http.NewRequest("GET", "https://api.upbit.com/v1/accounts", nil)
 	if err != nil {
 		log.Panic(err)
-		panic(err)
 	}
 	//println(req.URL.String())
 
@@ -31,7 +30,7 @@ func GetAccountInfo() AccountList {
 	accounts := AccountList{}
 	err = json.Unmarshal(resp, &accounts)
 	if err != nil {
-		panic(err)
+		log.Fatalln(string(resp), err)
 	}
 	return accounts
 }
