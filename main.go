@@ -26,12 +26,17 @@ const (
 	Btc   = "KRW-BTC"
 	Solve = "KRW-SOLVE"
 	Obsr  = "KRW-OBSR"
+
+	Orbs = "KRW-ORBS"
+	Qtcon = "KRW-QTCON"
+	Lamb = "KRW-LAMB"
+
 )
 
 
 func main() {
 	setting.LoadTradeCandleInfo()
-	coinList := []string{Tfuel, Ankr, Chz, Pxl, Kava, Solve, Mlk, Obsr}
+	coinList := []string{Tfuel, Orbs, Qtcon, Lamb, Kava, Solve, Mlk, Obsr}
 	var strategies []*strategy.Strategy
 
 	for _, coin := range coinList {
