@@ -2,11 +2,49 @@
 * *[UPBit](https://www.upbit.com/)* Auto Trading System with OpenAPI
 
 # Features
-* 현재 구현된 기능은 아래와 같습니다.
-  * 시장가 매도/매수
-  * 분봉 차트를 가져오는 기능
-  * jwt-token 생성기
+## 구현 작업 진행상황
+### 자산
+* [ ] [전체 계좌 조회](https://docs.upbit.com/reference#%EC%A0%84%EC%B2%B4-%EA%B3%84%EC%A2%8C-%EC%A1%B0%ED%9A%8C)
+### 주문
+* [ ] [개별 주문 조회](https://docs.upbit.com/reference#%EA%B0%9C%EB%B3%84-%EC%A3%BC%EB%AC%B8-%EC%A1%B0%ED%9A%8C)
+* [ ] [주문 리스트 조회](https://docs.upbit.com/reference#%EC%A3%BC%EB%AC%B8-%EB%A6%AC%EC%8A%A4%ED%8A%B8-%EC%A1%B0%ED%9A%8C)
+* [ ] [주문 취소 접수](https://docs.upbit.com/reference#%EC%A3%BC%EB%AC%B8-%EC%B7%A8%EC%86%8C)
+* [ ] [주문하기](https://docs.upbit.com/reference#%EC%A3%BC%EB%AC%B8%ED%95%98%EA%B8%B0)
+### 출금
+* [ ] [출금 리스트 조회](https://docs.upbit.com/reference#%EC%A0%84%EC%B2%B4-%EC%B6%9C%EA%B8%88-%EC%A1%B0%ED%9A%8C)
+* [ ] [개별 출금 조회](https://docs.upbit.com/reference#%EA%B0%9C%EB%B3%84-%EC%B6%9C%EA%B8%88-%EC%A1%B0%ED%9A%8C)
+* [ ] [출금 가능 정보](https://docs.upbit.com/reference#%EC%B6%9C%EA%B8%88-%EA%B0%80%EB%8A%A5-%EC%A0%95%EB%B3%B4)
+* [ ] [코인 출금하기](https://docs.upbit.com/reference#%EC%BD%94%EC%9D%B8-%EC%B6%9C%EA%B8%88%ED%95%98%EA%B8%B0)
+* [ ] [원화 출금하기](https://docs.upbit.com/reference#%EC%9B%90%ED%99%94-%EC%B6%9C%EA%B8%88%ED%95%98%EA%B8%B0)
+### 입금
+* [ ] [입금 리스트 조회](https://docs.upbit.com/reference#%EC%9E%85%EA%B8%88-%EB%A6%AC%EC%8A%A4%ED%8A%B8-%EC%A1%B0%ED%9A%8C)
+* [ ] [개별 입금 조회](https://docs.upbit.com/reference#%EA%B0%9C%EB%B3%84-%EC%9E%85%EA%B8%88-%EC%A1%B0%ED%9A%8C)
+* [ ] [입금 주소 생성 요청](https://docs.upbit.com/reference#%EC%9E%85%EA%B8%88-%EC%A3%BC%EC%86%8C-%EC%83%9D%EC%84%B1-%EC%9A%94%EC%B2%AD)
+* [ ] [전체 입금 주소 조회](https://docs.upbit.com/reference#%EC%A0%84%EC%B2%B4-%EC%9E%85%EA%B8%88-%EC%A3%BC%EC%86%8C-%EC%A1%B0%ED%9A%8C)
+* [ ] [개별 입금 주소 조회](https://docs.upbit.com/reference#%EA%B0%9C%EB%B3%84-%EC%9E%85%EA%B8%88-%EC%A4%8F-%EC%A1%B0%ED%9A%8C)
+* [ ] [원화 입금하기](https://docs.upbit.com/reference#%EC%9B%90%ED%99%94-%EC%9E%85%EA%B8%88%ED%95%98%EA%B8%B0)
 
+### 서비스 정보
+* [ ] [입출금 현황](https://docs.upbit.com/reference#%EC%9E%85%EC%B6%9C%EA%B8%88-%ED%98%84%ED%99%A9)
+* [ ] [API 키 리스트 조회](https://docs.upbit.com/reference#open-api-%ED%82%A4-%EB%A6%AC%EC%8A%A4%ED%8A%B8-%EC%A1%B0%ED%9A%8C)
+
+### 시세 종목 조회
+* [ ] [마켓 코드 조회](https://docs.upbit.com/reference#%EB%A7%88%EC%BC%93-%EC%BD%94%EB%93%9C-%EC%A1%B0%ED%9A%8C)
+
+### 시세 캔들 조회
+* [ ] [분 캔들 조회](https://docs.upbit.com/reference#%EB%B6%84minute-%EC%BA%94%EB%93%A4-1)
+* [ ] [일 캔들 조회](https://docs.upbit.com/reference#%EC%9D%BCday-%EC%BA%94%EB%93%A4-1)
+* [ ] [주 캔들 조회](https://docs.upbit.com/reference#%EC%A3%BCweek-%EC%BA%94%EB%93%A4-1)
+* [ ] [월 캔들 조회](https://docs.upbit.com/reference#%EC%9B%94month-%EC%BA%94%EB%93%A4-1)
+
+### 시세 체결 조회
+* [ ] [최근 체결 내역](https://docs.upbit.com/reference#%EC%B5%9C%EA%B7%BC-%EC%B2%B4%EA%B2%B0-%EB%82%B4%EC%97%AD)
+
+### 시세 Ticker 조회
+* [ ] [현재가 정보](https://docs.upbit.com/reference#%EC%8B%9C%EC%84%B8-ticker-%EC%A1%B0%ED%9A%8C)
+
+### 시세 호가 정보 (Orderbook) 조회
+* [ ] [호가 정보 조회](https://docs.upbit.com/reference#%EC%8B%9C%EC%84%B8-%ED%98%B8%EA%B0%80-%EC%A0%95%EB%B3%B4orderbook-%EC%A1%B0%ED%9A%8C)
 ## How to use?
 * `go`를 설치합니다. [Download and install go](https://golang.org/doc/install)
 * `${GOPATH}/src/github.com/shieldnet` 디렉토리를 만들어줍니다.
