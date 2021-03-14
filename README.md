@@ -2,7 +2,7 @@
 * *[UPBit](https://www.upbit.com/)* Auto Trading System with OpenAPI
 
 # Features
-## [구현 작업 진행상황]()
+## [구현 작업 진행상황](https://github.com/shieldnet/gobit/issues/8)
 
 ## How to use?
 * `go`를 설치합니다. [Download and install go](https://golang.org/doc/install)
