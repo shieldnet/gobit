@@ -16,6 +16,14 @@ import (
 	"net/url"
 )
 
+type Keys struct {
+	Secret []byte `json:"secret"`
+	Access string `json:"access"`
+}
+
+type KeySet []Keys
+
+
 func MakeJwtWithoutPayload(keys Keys) string {
 	token := jwt.New(jwt.SigningMethodHS256)
 	claims := make(jwt.MapClaims)
