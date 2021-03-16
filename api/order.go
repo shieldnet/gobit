@@ -8,7 +8,7 @@
 package api
 
 import (
-	jwt_maker "github.com/shieldnet/gobit/jwt-maker"
+	jwt_maker "github.com/shieldnet/gobit/jwtmaker"
 	"log"
 	"net/url"
 )

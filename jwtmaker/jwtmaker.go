@@ -5,7 +5,7 @@
 // All rights reserved.
 /* --------------------------------- */
 
-package jwt_maker
+package jwtmaker
 
 import (
 	"crypto/sha512"

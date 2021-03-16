@@ -9,7 +9,7 @@ package api
 
 import (
 	"encoding/json"
-	jwt_maker "github.com/shieldnet/gobit/jwt-maker"
+	jwt_maker "github.com/shieldnet/gobit/jwtmaker"
 	"log"
 	"net/http"
 )
