@@ -1,26 +1,12 @@
 # Go-Bit!
 * *[UPBit](https://www.upbit.com/)* Auto Trading System with OpenAPI
+* 이 레포지토리는 upbit를 위한 자동매매 프로그램을 개발하기 위해 제공하는 go module입니다.
 
 # Features
-## [구현 작업 진행상황](https://github.com/shieldnet/gobit/issues/8)
+* [구현 작업 진행상황](https://github.com/shieldnet/gobit/issues/8)
 
-## How to use?
-* `go`를 설치합니다. [Download and install go](https://golang.org/doc/install)
-* `${GOPATH}/src/github.com/shieldnet` 디렉토리를 만들어줍니다.
-  * FORK해서 사용하시는 경우, `${GOPATH}/src/github.com/<your_name>` 디렉토리를 만들어줍니다.
-* 해당 디렉토리로 이동한 후, `git clone https://github.com/shieldnet/gobit.git`을 진행해줍니다.
-* `cd gobit`을 통해 gobit 폴더로 이동해줍니다.
-* `go get` 명령어를 실행해 `go.mod`의 패키지를 다운로드해줍니다.
-* [Upbit OpenAPI 관리](https://upbit.com/mypage/open_api_management) 페이지에서 Open API Key를 발급받습니다.
-  * SecretKey는 발급받은 직후가 아니면 다시 볼 수 없습니다. 주의하시기 바랍니다.
-* `jwt-maker`폴더의 `keys.go.sample`에 발급받은 SecretKey와 AccessKey를 입력해 준 다음 `keys.go.sample`을 `keys.go`로 변경해줍니다.
-* 전략을 본인의 취향에 맞게 수정합니다. (`strategy.go.sample` 파일을 `strategy.go`로 변경해준 다음 작업합니다.)
-* `go run main.go`로 전략을 실행합니다.
-
-## 사용 결과 화면
-![image](https://user-images.githubusercontent.com/9548599/111020890-4e1e1380-840c-11eb-8c59-69141c5f7c9b.png)
-
-</details>
+## Sample Code Template
+* [shieldnet/gobit-sample](https://github.com/shieldnet/gobit-sample)
 
 ## Caution(주의사항)
 * 본 자동 매매 프로그램을 이용해서 손해가 발생하더라도, 저는 책임지지 않습니다.
