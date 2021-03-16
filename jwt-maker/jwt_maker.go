@@ -32,7 +32,7 @@ func MakeJwtWithoutPayload(keys Keys) string {
 	return signedToken
 }
 
-func MakeJwtWithPayload(keys Keys,payload url.Values) string {
+func MakeJwtWithPayload(keys Keys, payload url.Values) string {
 
 	claims := make(jwt.MapClaims)
 	claims["access_key"] = keys.Access
