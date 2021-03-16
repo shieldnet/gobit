@@ -9,7 +9,7 @@ package api
 
 import (
 	"encoding/json"
-	jwt_maker "github.com/shieldnet/gobit/jwtmaker"
+	"github.com/shieldnet/gobit/jwtmaker"
 	"log"
 	"net/http"
 )
@@ -25,14 +25,14 @@ type Account struct {
 
 type AccountList []Account
 
-func GetAccountInfo() AccountList {
+func GetAccountInfo(key jwtmaker.Keys) AccountList {
 	req, err := http.NewRequest("GET", "https://api.upbit.com/v1/accounts", nil)
 	if err != nil {
 		log.Panic(err)
 	}
 	//println(req.URL.String())
 
-	resp, _ := HttpGet(req.URL.String(), map[string]string{"Authorization": "Bearer " + jwt_maker.MakeJwtWithoutPayload(jwt_maker.MainKey)})
+	resp, _ := HttpGet(req.URL.String(), map[string]string{"Authorization": "Bearer " + jwtmaker.MakeJwtWithoutPayload(key)})
 	//println(string(resp))
 	accounts := AccountList{}
 	err = json.Unmarshal(resp, &accounts)
