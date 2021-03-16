@@ -25,6 +25,9 @@ const (
 
 const (
 	ByMinutes = "minutes/"
+	ByDays = "days"
+	ByWeeks = "weeks"
+	ByMonths = "months"
 )
 
 type Candle struct {
@@ -72,4 +75,64 @@ func GetAllMinuteCandlesOfMarket(unit, count int) map[string]CandleList {
 		time.Sleep(110 * time.Millisecond) // Quotation은 IP당 1초에 10개니까 API 개수 제한 걸자.
 	}
 	return ret
+}
+
+func GetDayCandle(count int, market string) CandleList {
+	req, err := http.NewRequest("GET", ApiAddr+Candles+ByDays, nil)
+	if err != nil {
+		log.Panic(err)
+	}
+	q := req.URL.Query()
+	q.Add("market", market)
+	q.Add("count", strconv.Itoa(count))
+	req.URL.RawQuery = q.Encode()
+
+	resp, _ := HttpGet(req.URL.String(), map[string]string{})
+	//println(string(resp))
+	candles := CandleList{}
+	err = json.Unmarshal(resp, &candles)
+	if err != nil {
+		log.Fatalln(string(resp), err)
+	}
+	return candles
+}
+
+func GetWeekCandle(count int, market string) CandleList {
+	req, err := http.NewRequest("GET", ApiAddr+Candles+ByDays, nil)
+	if err != nil {
+		log.Panic(err)
+	}
+	q := req.URL.Query()
+	q.Add("market", market)
+	q.Add("count", strconv.Itoa(count))
+	req.URL.RawQuery = q.Encode()
+
+	resp, _ := HttpGet(req.URL.String(), map[string]string{})
+	//println(string(resp))
+	candles := CandleList{}
+	err = json.Unmarshal(resp, &candles)
+	if err != nil {
+		log.Fatalln(string(resp), err)
+	}
+	return candles
+}
+
+func GetMonthCandle(count int, market string) CandleList {
+	req, err := http.NewRequest("GET", ApiAddr+Candles+ByMonths, nil)
+	if err != nil {
+		log.Panic(err)
+	}
+	q := req.URL.Query()
+	q.Add("market", market)
+	q.Add("count", strconv.Itoa(count))
+	req.URL.RawQuery = q.Encode()
+
+	resp, _ := HttpGet(req.URL.String(), map[string]string{})
+	//println(string(resp))
+	candles := CandleList{}
+	err = json.Unmarshal(resp, &candles)
+	if err != nil {
+		log.Fatalln(string(resp), err)
+	}
+	return candles
 }
