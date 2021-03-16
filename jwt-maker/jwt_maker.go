@@ -20,7 +20,8 @@ func MakeJwtWithoutPayload(keys Keys) string {
 	token := jwt.New(jwt.SigningMethodHS256)
 	claims := make(jwt.MapClaims)
 	claims["access_key"] = keys.Access
-	claims["nonce"] = uuid.NewV4().String()
+	u := uuid.NewV4()
+	claims["nonce"] = u.String()
 	token.Claims = claims
 
 	signedToken, err := token.SignedString(keys.Secret)
