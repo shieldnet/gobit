@@ -2,10 +2,7 @@
 * *[UPBit](https://www.upbit.com/)* Auto Trading System with OpenAPI
 
 # Features
-* 현재 구현된 기능은 아래와 같습니다.
-  * 시장가 매도/매수
-  * 분봉 차트를 가져오는 기능
-  * jwt-token 생성기
+## [구현 작업 진행상황](https://github.com/shieldnet/gobit/issues/8)
 
 ## How to use?
 * `go`를 설치합니다. [Download and install go](https://golang.org/doc/install)
@@ -23,6 +20,7 @@
 ## 사용 결과 화면
 ![image](https://user-images.githubusercontent.com/9548599/111020890-4e1e1380-840c-11eb-8c59-69141c5f7c9b.png)
 
+</details>
 
 ## Caution(주의사항)
 * 본 자동 매매 프로그램을 이용해서 손해가 발생하더라도, 저는 책임지지 않습니다.
