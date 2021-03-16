@@ -8,7 +8,7 @@
 package api
 
 import (
-	jwt_maker "github.com/shieldnet/gobit/jwtmaker"
+	jwtmaker "github.com/shieldnet/gobit/jwtmaker"
 	"log"
 	"net/url"
 )
@@ -17,12 +17,12 @@ const (
 	OrderURL = "https://api.upbit.com/v1/orders"
 )
 
-func BuyOrderByMarketPrice(market, totalPrice string) string {
+func BuyOrderByMarketPrice(market, totalPrice string, key jwtmaker.Keys) string {
 	ord_type := "price"
 	side := "bid"
 	data := makeUrlValues(market, side, "", totalPrice, ord_type)
 	header := map[string]string{
-		"Authorization": "Bearer " + jwt_maker.MakeJwtWithPayload(jwt_maker.MainKey, data),
+		"Authorization": "Bearer " + jwtmaker.MakeJwtWithPayload(key, data),
 	}
 	resp, err := HttpPOST(OrderURL, header, data)
 	if err != nil {
@@ -31,12 +31,12 @@ func BuyOrderByMarketPrice(market, totalPrice string) string {
 	return string(resp)
 }
 
-func SellOrderByMarketPrice(market, volume string) string {
+func SellOrderByMarketPrice(market, volume string, key jwtmaker.Keys) string {
 	ord_type := "market"
 	side := "ask"
 	data := makeUrlValues(market, side, volume, "", ord_type)
 	header := map[string]string{
-		"Authorization": "Bearer " + jwt_maker.MakeJwtWithPayload(jwt_maker.MainKey, data),
+		"Authorization": "Bearer " + jwtmaker.MakeJwtWithPayload(key, data),
 	}
 	resp, err := HttpPOST(OrderURL, header, data)
 	if err != nil {
