@@ -6,7 +6,6 @@
 .idea/*
 
 ## Private Files ##
-keys.go
 strategy.go
 result.json
 
