@@ -11,6 +11,7 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"net/url"
 	"strconv"
 	"time"
 )
@@ -56,7 +57,7 @@ func GetMinuteCandle(unit, count int, market string) CandleList {
 	q.Add("count", strconv.Itoa(count))
 	req.URL.RawQuery = q.Encode()
 
-	resp, _ := HttpGet(req.URL.String(), map[string]string{})
+	resp, _ := HttpGet(req.URL.String(), map[string]string{}, url.Values{})
 	//println(string(resp))
 	candles := CandleList{}
 	err = json.Unmarshal(resp, &candles)
@@ -87,7 +88,7 @@ func GetDayCandle(count int, market string) CandleList {
 	q.Add("count", strconv.Itoa(count))
 	req.URL.RawQuery = q.Encode()
 
-	resp, _ := HttpGet(req.URL.String(), map[string]string{})
+	resp, _ := HttpGet(req.URL.String(), map[string]string{}, url.Values{})
 	//println(string(resp))
 	candles := CandleList{}
 	err = json.Unmarshal(resp, &candles)
@@ -107,7 +108,7 @@ func GetWeekCandle(count int, market string) CandleList {
 	q.Add("count", strconv.Itoa(count))
 	req.URL.RawQuery = q.Encode()
 
-	resp, _ := HttpGet(req.URL.String(), map[string]string{})
+	resp, _ := HttpGet(req.URL.String(), map[string]string{}, url.Values{})
 	//println(string(resp))
 	candles := CandleList{}
 	err = json.Unmarshal(resp, &candles)
@@ -127,7 +128,7 @@ func GetMonthCandle(count int, market string) CandleList {
 	q.Add("count", strconv.Itoa(count))
 	req.URL.RawQuery = q.Encode()
 
-	resp, _ := HttpGet(req.URL.String(), map[string]string{})
+	resp, _ := HttpGet(req.URL.String(), map[string]string{}, url.Values{})
 	//println(string(resp))
 	candles := CandleList{}
 	err = json.Unmarshal(resp, &candles)

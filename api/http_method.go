@@ -16,10 +16,10 @@ import (
 	"time"
 )
 
-func HttpGet(url string, header map[string]string) ([]byte, error) {
+func HttpGet(url string, header map[string]string, data url.Values) ([]byte, error) {
 	client := http.Client{Timeout: 10 * time.Second}
 
-	req, err := http.NewRequest("GET", url, nil)
+	req, err := http.NewRequest(http.MethodGet, url, strings.NewReader(data.Encode()))
 	for k, v := range header {
 		req.Header.Add(k, v)
 	}
@@ -37,7 +37,7 @@ func HttpGet(url string, header map[string]string) ([]byte, error) {
 func HttpPOST(url string, header map[string]string, data url.Values) ([]byte, error) {
 	client := http.Client{Timeout: 10 * time.Second}
 
-	req, err := http.NewRequest("POST", url, strings.NewReader(data.Encode()))
+	req, err := http.NewRequest(http.MethodPost, url, strings.NewReader(data.Encode()))
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 	//println(data.Encode())
 	for k, v := range header {
