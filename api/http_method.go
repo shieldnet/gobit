@@ -53,3 +53,23 @@ func HttpPOST(url string, header map[string]string, data url.Values) ([]byte, er
 	defer resp.Body.Close()
 	return ioutil.ReadAll(resp.Body)
 }
+
+func HttpDelete(url string, header map[string]string, data url.Values) ([]byte, error) {
+	client := http.Client{Timeout: 10 * time.Second}
+
+	req, err := http.NewRequest(http.MethodDelete, url, strings.NewReader(data.Encode()))
+	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+
+	for k, v := range header {
+		req.Header.Add(k, v)
+	}
+
+	resp, err := client.Do(req)
+	if err != nil {
+		log.Fatal("[HttpGet] HTTP DELETE Error", err, resp.StatusCode)
+		return nil, err
+	}
+
+	defer resp.Body.Close()
+	return ioutil.ReadAll(resp.Body)
+}
