@@ -46,7 +46,6 @@ func MakeJwtWithPayload(keys Keys, payload url.Values) string {
 	claims := make(jwt.MapClaims)
 	claims["access_key"] = keys.Access
 	claims["nonce"] = uuid.NewV4().String()
-	claims["query"] = payload.Encode()
 	qh := sha512.New()
 	qh.Reset()
 	qh.Write([]byte(payload.Encode()))
