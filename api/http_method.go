@@ -19,7 +19,12 @@ import (
 func HttpGet(url string, header map[string]string, data url.Values) ([]byte, error) {
 	client := http.Client{Timeout: 10 * time.Second}
 
-	req, err := http.NewRequest(http.MethodGet, url+"?"+data.Encode(), nil)
+	reqUrl := url
+	if data.Encode() != "" {
+		reqUrl = url+"?"+data.Encode()
+	}
+
+	req, err := http.NewRequest(http.MethodGet, reqUrl, nil)
 	for k, v := range header {
 		req.Header.Add(k, v)
 	}
