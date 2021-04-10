@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"net/url"
 )
 
 type Market struct {
@@ -23,7 +24,7 @@ func GetAllMarketCodes() MarketList {
 	q.Add("isDetails", "false")
 	req.URL.RawQuery = q.Encode()
 
-	resp, _ := HttpGet(req.URL.String(), map[string]string{})
+	resp, _ := HttpGet(req.URL.String(), map[string]string{}, url.Values{})
 
 	markets := MarketList{}
 	err = json.Unmarshal(resp, &markets)

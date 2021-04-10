@@ -12,6 +12,7 @@ import (
 	"github.com/shieldnet/gobit/jwtmaker"
 	"log"
 	"net/http"
+	"net/url"
 )
 
 type Account struct {
@@ -32,7 +33,7 @@ func GetAccountInfo(key jwtmaker.Keys) AccountList {
 	}
 	//println(req.URL.String())
 
-	resp, _ := HttpGet(req.URL.String(), map[string]string{"Authorization": "Bearer " + jwtmaker.MakeJwtWithoutPayload(key)})
+	resp, _ := HttpGet(req.URL.String(), map[string]string{"Authorization": "Bearer " + jwtmaker.MakeJwtWithoutPayload(key)}, url.Values{})
 	//println(string(resp))
 	accounts := AccountList{}
 	err = json.Unmarshal(resp, &accounts)
