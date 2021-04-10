@@ -40,11 +40,11 @@ func Order(market, side, volume, price, ordType, identifier string, key jwtmaker
 }
 
 func Buy(market, price, volume string, key jwtmaker.Keys) string {
-	return Order(market, "ask", volume, price, "limit", "", key)
+	return Order(market, "bid", volume, price, "limit", "", key)
 }
 
 func Sell(market, price, volume string, key jwtmaker.Keys) string {
-	return Order(market, "bid", volume, price, "limit", "", key)
+	return Order(market, "ask", volume, price, "limit", "", key)
 }
 
 func Cancle(uuid, identifier string, key jwtmaker.Keys) string {
