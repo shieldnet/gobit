@@ -14,7 +14,9 @@ import (
 )
 
 const (
-	OrderURL = "https://api.upbit.com/v1/orders"
+	OrdersURL = "https://api.upbit.com/v1/orders"
+	OrderURL = "https://api.upbit.com/v1/order"
+
 )
 
 func BuyOrderByMarketPrice(market, totalPrice string, key jwtmaker.Keys) string {
@@ -32,7 +34,7 @@ func Order(market, side, volume, price, ordType, identifier string, key jwtmaker
 	header := map[string]string{
 		"Authorization": "Bearer " + jwtmaker.MakeJwtWithPayload(key, data),
 	}
-	resp, err := HttpPOST(OrderURL, header, data)
+	resp, err := HttpPOST(OrdersURL, header, data)
 	if err != nil {
 		log.Fatalln(string(resp), err)
 	}
@@ -76,7 +78,7 @@ func GetOrderList(market string, states []string, key jwtmaker.Keys) string {
 	header := map[string]string{
 		"Authorization": "Bearer " + jwtmaker.MakeJwtWithPayload(key, data),
 	}
-	resp, err := HttpGet(OrderURL, header, data)
+	resp, err := HttpGet(OrdersURL, header, data)
 	if err != nil {
 		log.Fatalln(string(resp), err)
 	}
